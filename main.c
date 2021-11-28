@@ -8,6 +8,7 @@
 
 #include "paginas.c"
 #include "info.h"
+#include "Ordem.h"
 
 int main(int argc, char *argv[]) {
 
@@ -27,6 +28,7 @@ int main(int argc, char *argv[]) {
     } else if (argc == 2 && strcmp(argv[1], "-k") == 0) {
 
         printf("---> Modo de impressao de chaves ativado ...\n");
+        Imprime_Percurso();
 
     } else {
 

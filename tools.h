@@ -46,4 +46,27 @@ int ordenaVetor(int *vetor, int tamanho) {
     return 0;
 }
 
+void Ler_pagina(int * chaves, int * filhos, char * fragmento, char * buffer)
+{
+    fragmento = strtok(buffer, DELIM_STR);
+    int marcachave = 0;
+    int marcafilho = 0;
+
+    for (int i = 0; i < TAM_PAGE; i++)
+    {
+       if (i%2 == 0)
+       {
+            filhos[marcafilho] = atoi(fragmento);
+            marcafilho++;
+       }
+       else
+       {
+           chaves[marcachave] = atoi(fragmento);
+           marcachave++;
+       }
+
+       fragmento = strtok(NULL, DELIM_STR);
+    }
+}
+
 #endif
