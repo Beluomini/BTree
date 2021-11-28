@@ -7,6 +7,7 @@
 #include <string.h>
 
 #include "paginas.c"
+#include "info.h"
 
 int main(int argc, char *argv[]) {
 
@@ -18,9 +19,10 @@ int main(int argc, char *argv[]) {
             printf("\nImportacao concluida com sucesso !!!");
         }
 
-    }else if(argc == 3 && strcmp(argv[1], "-p") == 0) {
+    }else if(argc == 2 && strcmp(argv[1], "-p") == 0) {
 
         printf("---> Modo de impressao das informacoes ativado ...");
+        Imprime_Info();
 
     } else if (argc == 2 && strcmp(argv[1], "-k") == 0) {
 
