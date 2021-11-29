@@ -173,7 +173,7 @@ int insereChave(FILE *chavesBinarios, int *rnnRaiz, int *rrnFilhoD, int *chaveP)
                             if(*chaveP < paginaAtual.chaves[i]){
                                 paginaAtual.chaves[i+1] = paginaAtual.chaves[i];
                                 paginaAtual.filhos[i+2] = paginaAtual.filhos[i+1];
-                                if(*chaveP > paginaAtual.chaves[i-1]){
+                                if(*chaveP > paginaAtual.chaves[i-1] || i == 0){
                                     paginaAtual.chaves[i] = *chaveP;
                                     paginaAtual.filhos[i+1] = *rrnFilhoD;
                                 }
@@ -229,7 +229,7 @@ int insereChave(FILE *chavesBinarios, int *rnnRaiz, int *rrnFilhoD, int *chaveP)
                             if(*chaveP < paginaAtual.chaves[i]){
                                 paginaAtual.chaves[i+1] = paginaAtual.chaves[i];
                                 paginaAtual.filhos[i+2] = paginaAtual.filhos[i+1];
-                                if(*chaveP > paginaAtual.chaves[i-1]){
+                                if(*chaveP > paginaAtual.chaves[i-1] || i == 0){
                                     paginaAtual.chaves[i] = *chaveP;
                                     paginaAtual.filhos[i+1] = *rrnFilhoD;
                                 }
@@ -285,7 +285,7 @@ int insereChave(FILE *chavesBinarios, int *rnnRaiz, int *rrnFilhoD, int *chaveP)
                         if(*chaveP < paginaAtual.chaves[i]){
                             paginaAtual.chaves[i+1] = paginaAtual.chaves[i];
                             paginaAtual.filhos[i+2] = paginaAtual.filhos[i+1];
-                            if(*chaveP > paginaAtual.chaves[i-1]){
+                            if(*chaveP > paginaAtual.chaves[i-1] || i == 0){
                                 paginaAtual.chaves[i] = *chaveP;
                                 paginaAtual.filhos[i+1] = *rrnFilhoD;
                             }
