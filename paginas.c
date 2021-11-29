@@ -99,9 +99,12 @@ int dividePromove(FILE *chavesBinarios,struct pagina paginaAtual, int *rnnRaiz, 
         if(i < (ORDEM-1)/2) {
             paginaAtual.chaves[i] = chavesParaDivisao[i];
             printf("\ngorila: %d", chavesParaDivisao[i]);
-            if(chavesParaDivisao[i] == *chaveP) {
-                // printf("\npassei %d -> %d", *rrnFilhoD, paginaAtual.filhos[i+1]);
+            if(chavesParaDivisao[i] == *chaveP && i != 0) {
                 paginaFilhoDir.filhos[0] = paginaAtual.filhos[i+1];
+                paginaAtual.filhos[i+1] = *rrnFilhoD;
+            }else if(chavesParaDivisao[i] == *chaveP && i == 0){
+                paginaFilhoDir.filhos[0] = paginaAtual.filhos[i+2];
+                paginaAtual.filhos[i+2] = paginaAtual.filhos[i+1];
                 paginaAtual.filhos[i+1] = *rrnFilhoD;
             }
         }else if(ORDEM%2 == 0 && i == ORDEM/2) {
@@ -121,6 +124,10 @@ int dividePromove(FILE *chavesBinarios,struct pagina paginaAtual, int *rnnRaiz, 
                 printf("\nposicao chave %d", i-(ORDEM+2)/2+1);
                 paginaFilhoDir.filhos[i-(ORDEM+2)/2] = paginaAtual.filhos[i];
                 paginaFilhoDir.filhos[i-(ORDEM+2)/2+1] = *rrnFilhoD;
+            }else if(chavesParaDivisao[i+1] == chaveAntiga){
+                printf("\nposicao filho %d", i-(ORDEM+2)/2);
+                printf("\nfilho %d", paginaAtual.filhos[i]);
+                paginaFilhoDir.filhos[i-(ORDEM+2)/2] = paginaAtual.filhos[i];
             }else{
                 printf("\n1- posicao chave %d", i+1-(ORDEM+2)/2);
                 printf("\n1- filho %d: %d", i, paginaAtual.filhos[i]);
