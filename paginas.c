@@ -156,12 +156,19 @@ int insereChave(FILE *chavesBinarios, int *rnnRaiz, int *rrnFilhoD, int *chaveP)
             if(paginaAtual.filhos[percorreChaves] != -1) {
                 if(insereChave(chavesBinarios, &paginaAtual.filhos[percorreChaves], rrnFilhoD, chaveP) != 0) {
                     if(paginaAtual.qtdchaves < ORDEM-1) {
-                        for(int i = paginaAtual.qtdchaves; i > percorreChaves; i--) {
-                            paginaAtual.chaves[i] = paginaAtual.chaves[i-1];
-                            paginaAtual.filhos[i+1] = paginaAtual.filhos[i];
+                        for(int i = paginaAtual.qtdchaves-1; i > -1; i--) {
+                            if(*chaveP < paginaAtual.chaves[i]){
+                                paginaAtual.chaves[i+1] = paginaAtual.chaves[i];
+                                paginaAtual.filhos[i+2] = paginaAtual.filhos[i+1];
+                                if(*chaveP > paginaAtual.chaves[i-1]){
+                                    paginaAtual.chaves[i] = *chaveP;
+                                    paginaAtual.filhos[i+1] = *rrnFilhoD;
+                                }
+                            }else if(i == paginaAtual.qtdchaves-1){
+                                paginaAtual.chaves[i+1] = *chaveP;
+                                paginaAtual.filhos[i+2] = *rrnFilhoD;
+                            }
                         }
-                        paginaAtual.chaves[percorreChaves] = *chaveP;
-                        paginaAtual.filhos[percorreChaves+1] = *rrnFilhoD;
 
                         memset(paginaAtualStr, 0, sizeof(paginaAtualStr));
                         criaStringPagina(paginaAtual, paginaAtualStr);
@@ -202,8 +209,19 @@ int insereChave(FILE *chavesBinarios, int *rnnRaiz, int *rrnFilhoD, int *chaveP)
             if(paginaAtual.filhos[percorreChaves] != -1 && *chaveP > paginaAtual.chaves[percorreChaves-1]){
                 if(insereChave(chavesBinarios, &paginaAtual.filhos[percorreChaves], rrnFilhoD, chaveP) != 0) {
                     if(paginaAtual.qtdchaves < ORDEM-1) {
-                        paginaAtual.chaves[paginaAtual.qtdchaves] = *chaveP;
-                        paginaAtual.filhos[paginaAtual.qtdchaves+1] = *rrnFilhoD;
+                        for(int i = paginaAtual.qtdchaves-1; i > -1; i--) {
+                            if(*chaveP < paginaAtual.chaves[i]){
+                                paginaAtual.chaves[i+1] = paginaAtual.chaves[i];
+                                paginaAtual.filhos[i+2] = paginaAtual.filhos[i+1];
+                                if(*chaveP > paginaAtual.chaves[i-1]){
+                                    paginaAtual.chaves[i] = *chaveP;
+                                    paginaAtual.filhos[i+1] = *rrnFilhoD;
+                                }
+                            }else if(i == paginaAtual.qtdchaves-1){
+                                paginaAtual.chaves[i+1] = *chaveP;
+                                paginaAtual.filhos[i+2] = *rrnFilhoD;
+                            }
+                        }
 
                         memset(paginaAtualStr, 0, sizeof(paginaAtualStr));
                         criaStringPagina(paginaAtual, paginaAtualStr);
@@ -242,8 +260,19 @@ int insereChave(FILE *chavesBinarios, int *rnnRaiz, int *rrnFilhoD, int *chaveP)
         }else if(paginaAtual.filhos[percorreChaves+1] != -1 && *chaveP > paginaAtual.chaves[percorreChaves] && *chaveP < paginaAtual.chaves[percorreChaves+1]){
             if(insereChave(chavesBinarios, &paginaAtual.filhos[percorreChaves+1], rrnFilhoD, chaveP) != 0) {
                 if(paginaAtual.qtdchaves < ORDEM-1) {
-                    paginaAtual.chaves[paginaAtual.qtdchaves] = *chaveP;
-                    paginaAtual.filhos[paginaAtual.qtdchaves+1] = *rrnFilhoD;
+                    for(int i = paginaAtual.qtdchaves-1; i > -1; i--) {
+                        if(*chaveP < paginaAtual.chaves[i]){
+                            paginaAtual.chaves[i+1] = paginaAtual.chaves[i];
+                            paginaAtual.filhos[i+2] = paginaAtual.filhos[i+1];
+                            if(*chaveP > paginaAtual.chaves[i-1]){
+                                paginaAtual.chaves[i] = *chaveP;
+                                paginaAtual.filhos[i+1] = *rrnFilhoD;
+                            }
+                        }else if(i == paginaAtual.qtdchaves-1){
+                            paginaAtual.chaves[i+1] = *chaveP;
+                            paginaAtual.filhos[i+2] = *rrnFilhoD;
+                        }
+                    }
 
                     memset(paginaAtualStr, 0, sizeof(paginaAtualStr));
                     criaStringPagina(paginaAtual, paginaAtualStr);
