@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "paginas.c"
+#include "paginas.h"
 #include "Ordem.h"
 #include "imprimetree.h"
 
