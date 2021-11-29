@@ -7,8 +7,8 @@
 #include <string.h>
 
 #include "paginas.c"
-#include "info.h"
 #include "Ordem.h"
+#include "imprimetree.h"
 
 int main(int argc, char *argv[]) {
 
@@ -16,14 +16,12 @@ int main(int argc, char *argv[]) {
 
         printf("---> Modo de criacao de arvore ativado ... nome do arquivo = %s\n", argv[2]);
         int error_log = inicializacao(argv[2]);
-        if(error_log == 1){
-            printf("\nImportacao concluida com sucesso !!!");
-        }
+        printf("\nImportacao concluida com sucesso !!!");
 
     }else if(argc == 2 && strcmp(argv[1], "-p") == 0) {
 
         printf("---> Modo de impressao das informacoes ativado ...");
-        Imprime_Info();
+        imprime_arvore();
 
     } else if (argc == 2 && strcmp(argv[1], "-k") == 0) {
 
