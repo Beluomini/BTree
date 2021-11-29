@@ -92,10 +92,16 @@ int dividePromove(FILE *chavesBinarios,struct pagina paginaAtual, int *rnnRaiz, 
     int chaveAntiga = *chaveP;
 
     for(int i = 0; i < ORDEM; i++) {
+        printf(" |%d| ", paginaAtual.filhos[i]);
+    }
+
+    for(int i = 0; i < ORDEM; i++) {
         if(i < (ORDEM-1)/2) {
             paginaAtual.chaves[i] = chavesParaDivisao[i];
+            printf("\ngorila: %d", chavesParaDivisao[i]);
             if(chavesParaDivisao[i] == *chaveP) {
-                paginaAtual.filhos[i+2] = paginaAtual.filhos[i+1];
+                // printf("\npassei %d -> %d", *rrnFilhoD, paginaAtual.filhos[i+1]);
+                paginaFilhoDir.filhos[0] = paginaAtual.filhos[i+1];
                 paginaAtual.filhos[i+1] = *rrnFilhoD;
             }
         }else if(ORDEM%2 == 0 && i == ORDEM/2) {
@@ -103,7 +109,9 @@ int dividePromove(FILE *chavesBinarios,struct pagina paginaAtual, int *rnnRaiz, 
             paginaAtual.chaves[i] = -1;
             *chaveP = chavesParaDivisao[i];
         }else if(ORDEM%2 != 0 && i == ((ORDEM-1)/2)) {
-            paginaFilhoDir.filhos[0] = paginaAtual.filhos[i];
+            if(chavesParaDivisao[i] == chaveAntiga) {
+                paginaFilhoDir.filhos[0] = *rrnFilhoD;
+            }
             paginaAtual.chaves[i] = -1;
             *chaveP = chavesParaDivisao[i];
         } else {
@@ -114,6 +122,8 @@ int dividePromove(FILE *chavesBinarios,struct pagina paginaAtual, int *rnnRaiz, 
                 paginaFilhoDir.filhos[i-(ORDEM+2)/2] = paginaAtual.filhos[i];
                 paginaFilhoDir.filhos[i-(ORDEM+2)/2+1] = *rrnFilhoD;
             }else{
+                printf("\n1- posicao chave %d", i+1-(ORDEM+2)/2);
+                printf("\n1- filho %d: %d", i, paginaAtual.filhos[i]);
                 paginaFilhoDir.filhos[i+1-(ORDEM+2)/2] = paginaAtual.filhos[i];
             }
             paginaAtual.chaves[i] = -1;
@@ -246,6 +256,10 @@ int insereChave(FILE *chavesBinarios, int *rnnRaiz, int *rrnFilhoD, int *chaveP)
                 return 0;
 
             }else if(paginaAtual.qtdchaves < ORDEM-1) {
+                for(int i = paginaAtual.qtdchaves; i > percorreChaves; i--) {
+                    paginaAtual.chaves[i] = paginaAtual.chaves[i-1];
+                    paginaAtual.filhos[i+1] = paginaAtual.filhos[i];
+                }
                 paginaAtual.chaves[paginaAtual.qtdchaves] = *chaveP;
                 paginaAtual.filhos[paginaAtual.qtdchaves+1] = *rrnFilhoD;
 
